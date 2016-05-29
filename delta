@@ -7,7 +7,32 @@ server {
 
         server_name www.deltadrome.us deltadrome.us;
 
+        location / {
+            try_files $uri $uri/ =404;
+        }
+
+        location /static {
+            try_files $uri $uri/static $uri/ =404;
+        }
+
         location /pots {
+            root /www/data/;
+
+            index index.html index.htm;
+        }
+
+        location /hasken {
+            root /www/data/;
+
+            index index.html index.htm;
+        }
+
+        location /truth {
+            root /www/data/;
+
+            index index.html index.htm;
+        }
+        location /pots/ {
             proxy_redirect off;
             proxy_set_header X-Real-IP  $remote_addr;
             proxy_set_header X-Forwarded-For $remote_addr;
@@ -15,15 +40,15 @@ server {
             proxy_pass http://127.0.0.1:8000/;
         }
 
-        location /hasken {
+        location /hasken/api/ {
             proxy_redirect off;
             proxy_set_header X-Real-IP  $remote_addr;
             proxy_set_header X-Forwarded-For $remote_addr;
             proxy_set_header Host $host;
-            proxy_pass http://127.0.0.1:8002/;
+            proxy_pass http://127.0.0.1:8009/;
         }
 
-        location /truth {
+        location /truth/api/ {
             proxy_redirect off;
             proxy_set_header X-Real-IP  $remote_addr;
             proxy_set_header X-Forwarded-For $remote_addr;
