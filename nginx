@@ -1,0 +1,23 @@
+server {
+
+        listen 80;
+
+        root /www/data/delta;
+        index index.html index.htm;
+
+        server_name www.deltadrome.us deltadrome.us;
+
+        location / {
+            try_files $uri $uri/ =404;
+        }
+
+        location /static {
+            try_files $uri $uri/static $uri/ =404;
+        }
+
+        location /bleak {
+            root /www/data/;
+
+            index index.html index.htm;
+        }
+}
